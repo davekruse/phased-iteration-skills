@@ -13,21 +13,28 @@ them.
 
 | Step | Command            | Model                  | What it does |
 |------|--------------------|------------------------|--------------|
-| 1    | `/phaser:plan`      | Fable 5                | Interview -> append Phase N to `implementation-plan.md` |
+| 1    | `/phaser:plan`      | Fable 5                | Interview -> append Phase N to the plan file |
 | 2    | `/phaser:propose`   | Fable 5                | `/opsx:propose` with ALL architectural decisions made up front |
 | 3    | `/phaser:scrutinize`| Opus (latest)          | (after `/clear`) question the spec from multiple angles, item by item |
 | 4    | `/phaser:apply`     | Sonnet + Opus advisor  | `/opsx:apply` — faithful execution; spec conflicts go to the `spec-advisor` subagent |
-| 5    | `/phaser:review`    | Sonnet (latest)        | (after `/clear`) senior review of staged+unstaged changes, item by item |
-| 6    | `/phaser:archive`   | Fable 5                | `/opsx:archive` + mark phase Complete |
+| 5    | `/phaser:review`    | Opus (latest)          | (after `/clear`) senior review of staged+unstaged changes, item by item |
+| 6    | `/phaser:archive`   | Sonnet (latest)        | `/opsx:archive` + mark phase Complete |
 
 Model pins use `claude-fable-5` explicitly and the `opus` / `sonnet` aliases,
 which resolve to the newest model of each tier — so when new Opus/Sonnet
 versions ship, the workflow upgrades automatically without editing pins.
 
-`implementation-plan.md` (repo root of the app you're building) is the
-append-only memory of the project: one numbered section per phase, with a
-status line the commands keep updated (Planned -> Proposed -> Scrutinized ->
-Implemented -> Reviewed -> Complete).
+The plan file (repo root of the app you're building) is the append-only
+memory of the project: one numbered section per phase, with a status line the
+commands keep updated (Planned -> Proposed -> Scrutinized -> Implemented ->
+Reviewed -> Complete).
+
+Plans can be **scoped**: `/phaser:plan ats 10` records Phase 10 in
+`implementation-plan-ats.md` instead of the default `implementation-plan.md`,
+so one repo can carry several independent phase sequences. Downstream
+commands take the same optional scope, or find the right plan file by which
+one references the OpenSpec change id; with a single plan file nothing
+changes.
 
 Prerequisite: OpenSpec's `/opsx` commands must be installed in the target
 project.
@@ -66,8 +73,8 @@ phased-iteration-skills/
 │       │   ├── propose.md        # /phaser:propose    (model: claude-fable-5)
 │       │   ├── scrutinize.md     # /phaser:scrutinize (model: opus)
 │       │   ├── apply.md          # /phaser:apply      (model: sonnet)
-│       │   ├── review.md         # /phaser:review     (model: sonnet)
-│       │   └── archive.md        # /phaser:archive    (model: claude-fable-5)
+│       │   ├── review.md         # /phaser:review     (model: opus)
+│       │   └── archive.md        # /phaser:archive    (model: sonnet)
 │       └── agents/
 │           └── spec-advisor.md   # Opus advisor consulted by /phaser:apply
 └── README.md
