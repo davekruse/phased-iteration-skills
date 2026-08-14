@@ -1,0 +1,81 @@
+---
+description: "Step 2 of 6 — Use a frontier model to create an OpenSpec proposal (/opsx:propose) for the current phase, with ALL architectural decisions made up front so a smaller model can implement it"
+argument-hint: "[optional: phase number, defaults to latest Planned phase]"
+model: claude-fable-5
+---
+
+> Invocation note: this command is only ever run by the user directly, or as a
+> user-confirmed hand-off from `/phaser:plan`. Never invoke it on your own
+> initiative.
+
+# phaser:propose — Create the OpenSpec proposal for a phase
+
+You are the ARCHITECT in a phased iteration workflow. You are a frontier model
+writing a spec that a smaller model (Sonnet) will implement via `/opsx:apply`.
+The implementing model must never need to make an architectural choice. Every
+decision is made here, now, by you and the user.
+
+## Step 1: Load the phase
+
+- Read `implementation-plan.md` in the repo root.
+- Target phase: `$ARGUMENTS` if a phase number was given, otherwise the
+  highest-numbered phase with status "Planned".
+- If no such phase exists, stop and tell the user to run `/phaser:plan` first.
+- Read enough of the codebase to ground your decisions in what actually
+  exists: project structure, existing conventions, key modules the phase
+  touches, existing openspec specs if present.
+
+## Step 2: Make the architectural decisions
+
+Before invoking openspec, resolve every open question. This includes, where
+relevant:
+
+- File and module structure: exact paths of files to create or modify
+- Naming: classes, functions, endpoints, database tables/columns, events
+- Data model and migrations: exact schema changes
+- Interfaces and contracts: function signatures, request/response shapes,
+  types
+- Library and dependency choices, with versions where it matters
+- Error handling strategy, validation rules, and edge-case behavior
+- Testing approach: what gets unit vs integration tests, and test file
+  locations
+- Ordering: the sequence of tasks so nothing depends on something not yet
+  built
+
+Follow the codebase's existing conventions unless the phase explicitly changes
+them. If two defensible options exist and the phase definition does not settle
+it, briefly ask the user rather than deferring the choice into the spec — the
+spec must contain the answer, not the question.
+
+## Step 3: Create the proposal
+
+Invoke the `/opsx:propose` command (via the SlashCommand tool) to create the
+OpenSpec change proposal for this phase, feeding it the phase definition and
+your architectural decisions.
+
+Then review what openspec generated and edit the proposal artifacts so that:
+
+- The **why/what** ties back explicitly to Phase N in implementation-plan.md
+  (reference the phase number by name).
+- Every task is mechanical: an implementer should be able to complete it
+  without deciding anything. "Add `POST /api/boxes` returning `201` with body
+  `{id, name, tier}` handled in `src/routes/boxes.ts` using the existing
+  `validate()` middleware" — not "add an endpoint for boxes".
+- Design decisions AND the rejected alternatives (with one-line reasons) are
+  captured in the design doc, so `/phaser:scrutinize` can challenge them.
+- Acceptance criteria from the phase map onto specific tasks; nothing in the
+  phase is left uncovered.
+
+## Step 4: Hand off
+
+Update the phase's status line in `implementation-plan.md` to
+`**Status:** Proposed (<openspec change id>)`.
+
+End your final message with this reminder block, verbatim, as the very last
+thing (this hand-off crosses a context clear, so it cannot be automated):
+
+> **Next step** (fresh context required):
+> 1. `/clear`
+> 2. `/phaser:scrutinize`
+>
+> Scrutiny must be a cold read of the proposal, so don't skip the clear.

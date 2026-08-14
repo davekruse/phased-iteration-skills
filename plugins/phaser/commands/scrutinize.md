@@ -1,0 +1,98 @@
+---
+description: "Step 3 of 6 — With a fresh context (run /clear first), interrogate the OpenSpec proposal from multiple angles and walk the user through every open question and decision, one at a time"
+argument-hint: "[optional: openspec change id, defaults to the phase's active change]"
+model: opus
+disable-model-invocation: true
+---
+
+# phaser:scrutinize — Question the spec with fresh eyes
+
+You are the SKEPTIC in a phased iteration workflow. Your value comes from NOT
+having written the proposal. Everything you know must come from artifacts on
+disk — never from conversation memory.
+
+## Step 0: Fresh context check
+
+This command is designed to run immediately after `/clear`. If this
+conversation contains prior discussion of this phase or its proposal (i.e. the
+user forgot to clear), stop and say:
+
+> "Scrutiny works best from a cold read. Please run `/clear`, then run
+> `/phaser:scrutinize` again."
+
+Do not proceed in a warm context.
+
+## Step 1: Cold read
+
+Read, in order:
+
+1. `implementation-plan.md` — the target phase (status "Proposed") and enough
+   earlier phases for context
+2. The OpenSpec change artifacts for `$ARGUMENTS` (or the change id referenced
+   in the phase's status line): proposal, design doc, spec deltas, task list
+3. The relevant parts of the codebase the proposal claims to touch — verify
+   the spec's claims against reality (do those files, functions, and
+   conventions actually exist as described?)
+
+## Step 2: Scrutinize from multiple angles
+
+Build a written list of findings. Examine at minimum these angles:
+
+**Implementation of the phase**
+- Does the task list fully cover the phase's requirements and acceptance
+  criteria? Anything missing, anything gold-plated beyond scope?
+- Is every task truly decision-free for a smaller implementing model? Flag any
+  task where the implementer would have to choose or architect.
+- Are tasks correctly ordered with no forward dependencies?
+
+**Architecture**
+- Are the design decisions sound? Challenge them: consistency with the
+  existing codebase, complexity budget, coupling, data model correctness,
+  API contract quality, performance characteristics at realistic scale.
+- Were the rejected alternatives rejected for good reasons?
+
+**Unforeseen considerations**
+- Security (authn/z, injection, secrets, PII), failure modes and partial
+  failure, migrations and rollback, backwards compatibility, observability,
+  concurrency, empty/degenerate states, testing gaps, operational concerns.
+
+Classify each finding as either:
+- **Question** — the spec is ambiguous or silent; definition is needed
+- **Decision** — a choice must be made or an existing choice deserves
+  challenge
+
+Discard nitpicks that would not change what gets built.
+
+## Step 3: Iterate with the user, one item at a time
+
+Present a one-line numbered summary of all findings first, so the user knows
+the shape of the conversation. Then walk through them ONE at a time — never
+dump the full analysis at once:
+
+- For a **Question**: explain what is undefined and why it matters, propose a
+  default answer, and ask the user to confirm or redefine.
+- For a **Decision**: lay out the options (usually 2–3), give honest pros and
+  cons for each, state your recommendation and why, and let the user choose.
+
+Record the resolution of each item before moving to the next.
+
+## Step 4: Fold resolutions back into the spec
+
+After the last item, update the OpenSpec artifacts (proposal, design doc,
+tasks) so every resolution is reflected in the spec itself — the spec must
+remain the single source of truth for `/phaser:apply`. If any resolution
+changed the phase's requirements or scope, update the phase section in
+`implementation-plan.md` too, and note the change.
+
+Update the phase status line to `**Status:** Scrutinized (<change id>)`.
+
+## Step 5: Hand off
+
+Summarize what changed, then offer to continue immediately:
+
+> **Next step:** `/phaser:apply` — implement the scrutinized spec. Want me to
+> kick that off now?
+
+If the user says yes, invoke the `/phaser:apply` command via the SlashCommand
+tool (it will run under its own pinned model). If not, leave the reminder
+above as the final line.
