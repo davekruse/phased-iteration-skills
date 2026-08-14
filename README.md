@@ -30,6 +30,24 @@ Sonnet for the whole run (the scrutinize hand-off reminds you). Drift on the
 other steps is harmless — it only ever moves to your session's stronger
 model.
 
+## How decisions reach you
+
+Every point where a step needs *your* call — an architectural fork in
+`propose`, a finding in `scrutinize` or `review`, a spec-vs-reality conflict
+escalated by the advisor during `apply` — follows the same shape:
+
+1. The issue is described in text: what's undecided, why it matters, and what
+   each candidate buys and costs.
+2. Then it's presented as **selectable options**, one question per item, with
+   the recommendation first and the key pro *and* con of each path in the
+   option itself.
+3. One item at a time — no wall of findings, no bare free-text questions. The
+   built-in "Other" is always there when none of the options fit.
+
+`plan` is the exception: it's an open-ended interview, so it asks in prose.
+`/phaser:plan` opens by asking what the phase should accomplish — including
+`/phaser:plan ats`, where `ats` is the plan scope, not the thing to build.
+
 The plan file (repo root of the app you're building) is the append-only
 memory of the project: one numbered section per phase, with a status line the
 commands keep updated (Planned -> Proposed -> Scrutinized -> Implemented ->
@@ -37,7 +55,9 @@ Reviewed -> Complete).
 
 Plans can be **scoped**: `/phaser:plan ats 10` records Phase 10 in
 `implementation-plan-ats.md` instead of the default `implementation-plan.md`,
-so one repo can carry several independent phase sequences. Downstream
+so one repo can carry several independent phase sequences. The number is
+optional — `/phaser:plan ats` just means "next phase in the ats plan".
+Downstream
 commands take the same optional scope, or find the right plan file by which
 one references the OpenSpec change id; with a single plan file nothing
 changes.
