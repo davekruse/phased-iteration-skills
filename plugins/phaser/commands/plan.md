@@ -1,6 +1,6 @@
 ---
-description: "Step 1 of 6 — Discuss and define requirements for the next phase of development, then record it as the next numbered phase in implementation-plan.md"
-argument-hint: "[optional: one-line summary of what this phase should accomplish]"
+description: "Step 1 of 6 — Discuss and define requirements for the next phase of development, then record it as the next numbered phase in the (optionally scoped) implementation plan file"
+argument-hint: "[optional: scope] [optional: phase number] [optional: one-line summary of what this phase should accomplish]"
 model: claude-fable-5
 disable-model-invocation: true
 ---
@@ -9,14 +9,26 @@ disable-model-invocation: true
 
 You are facilitating the PLAN step of a phased iteration workflow. Your job is
 to interview the user, converge on a well-defined phase of development, and
-record it durably in `implementation-plan.md` at the repository root.
+record it durably in the plan file at the repository root
+(`implementation-plan.md`, or `implementation-plan-<scope>.md` when scoped).
 
 ## Step 1: Read current state
 
-- Read `implementation-plan.md` in the repo root. If it does not exist, you
-  will create it with a title and a short preamble explaining that it is the
-  numbered sequence of development phases for this application.
-- Determine the next phase number N (existing highest phase + 1, or 1).
+- Resolve the plan file. Plans may be scoped: `implementation-plan-<scope>.md`
+  (e.g. `implementation-plan-ats.md` for scope `ats`) alongside or instead of
+  the unscoped `implementation-plan.md`, all in the repo root.
+  - If `$ARGUMENTS` starts with a scope token (a short slug like `ats` — not a
+    number, not the start of a summary sentence), use
+    `implementation-plan-<scope>.md`. When it's unclear whether the first
+    token is a scope or part of the summary, ask.
+  - With no scope: use `implementation-plan.md`; if it doesn't exist but
+    scoped plan files do, ask which scope this phase belongs to.
+- If the plan file does not exist, you will create it with a title and a short
+  preamble explaining that it is the numbered sequence of development phases
+  for this application (or for this scope).
+- Determine the phase number N: an explicit number in `$ARGUMENTS` if given
+  (warn if it collides with an existing phase or leaves a gap), otherwise the
+  existing highest phase + 1, or 1.
 - Skim earlier phases so the new phase builds on — and does not contradict or
   duplicate — what came before.
 
@@ -51,7 +63,7 @@ increment.
 ## Step 3: Record the phase
 
 Present a draft of the phase section to the user for confirmation, then append
-it to `implementation-plan.md`:
+it to the plan file:
 
 ```markdown
 ## Phase N: <short title>

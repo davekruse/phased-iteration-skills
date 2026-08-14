@@ -1,5 +1,5 @@
 ---
-description: "Step 6 of 6 — Archive the completed OpenSpec change (/opsx:archive) and mark the phase complete in implementation-plan.md"
+description: "Step 6 of 6 — Archive the completed OpenSpec change (/opsx:archive) and mark the phase complete in the plan file"
 argument-hint: "[optional: openspec change id, defaults to the phase's active change]"
 model: sonnet
 ---
@@ -15,7 +15,9 @@ You are closing the loop on a phase of the phased iteration workflow.
 ## Step 1: Preflight
 
 - Identify the change: `$ARGUMENTS` if given, otherwise the change id in the
-  status line of the latest phase in `implementation-plan.md`.
+  status line of the latest phase in the plan file (`implementation-plan.md`
+  or a scoped `implementation-plan-<scope>.md`; with several plan files, the
+  one whose status line references the change id — ask if still ambiguous).
 - If the phase status is not "Reviewed", warn the user and confirm they want
   to archive anyway.
 - Check `git status`: if the phase's changes are still uncommitted, point that
@@ -30,7 +32,7 @@ the archive.
 
 ## Step 3: Record completion
 
-In `implementation-plan.md`, update the phase's status line to:
+In the plan file, update the phase's status line to:
 
 `**Status:** Complete (<YYYY-MM-DD>, change <change id>)`
 

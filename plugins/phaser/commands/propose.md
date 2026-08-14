@@ -1,6 +1,6 @@
 ---
 description: "Step 2 of 6 — Use a frontier model to create an OpenSpec proposal (/opsx:propose) for the current phase, with ALL architectural decisions made up front so a smaller model can implement it"
-argument-hint: "[optional: phase number, defaults to latest Planned phase] [optional: extra context or constraints for the proposal]"
+argument-hint: "[optional: scope] [optional: phase number, defaults to latest Planned phase] [optional: extra context or constraints for the proposal]"
 model: claude-fable-5
 ---
 
@@ -17,7 +17,10 @@ decision is made here, now, by you and the user.
 
 ## Step 1: Load the phase
 
-- Read `implementation-plan.md` in the repo root.
+- Resolve the plan file: `implementation-plan-<scope>.md` if `$ARGUMENTS`
+  starts with a scope token, otherwise the repo's single
+  `implementation-plan*.md`; if several plan files exist and no scope was
+  given, ask which one. Read it.
 - Target phase: the phase number in `$ARGUMENTS` if one was given, otherwise
   the highest-numbered phase with status "Planned". Any remaining text in
   `$ARGUMENTS` is extra context/constraints from the user — honor it alongside
@@ -64,8 +67,8 @@ your architectural decisions.
 
 Then review what openspec generated and edit the proposal artifacts so that:
 
-- The **why/what** ties back explicitly to Phase N in implementation-plan.md
-  (reference the phase number by name).
+- The **why/what** ties back explicitly to Phase N in the plan file
+  (reference the plan file and phase number by name).
 - Every task is mechanical: an implementer should be able to complete it
   without deciding anything. "Add `POST /api/boxes` returning `201` with body
   `{id, name, tier}` handled in `src/routes/boxes.ts` using the existing
@@ -81,7 +84,7 @@ Then review what openspec generated and edit the proposal artifacts so that:
 
 ## Step 4: Hand off
 
-Update the phase's status line in `implementation-plan.md` to
+Update the phase's status line in the plan file to
 `**Status:** Proposed (<openspec change id>)`.
 
 End your final message with this reminder block, verbatim, as the very last
@@ -89,6 +92,9 @@ thing (this hand-off crosses a context clear, so it cannot be automated):
 
 > **Next step** (fresh context required):
 > 1. `/clear`
-> 2. `/phaser:scrutinize`
+> 2. `/phaser:scrutinize <change id>`
 >
 > Scrutiny must be a cold read of the proposal, so don't skip the clear.
+
+(Substitute the actual openspec change id so the next step is unambiguous
+even with multiple plan files.)

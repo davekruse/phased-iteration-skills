@@ -19,8 +19,10 @@ stop and ask them to run `/clear` and invoke `/phaser:review` again.
 
 ## Step 1: Cold read
 
-1. `implementation-plan.md` — the target phase (status "Implemented") and its
-   acceptance criteria
+1. The plan file — `implementation-plan.md`, or a scoped
+   `implementation-plan-<scope>.md`; with several plan files, the one whose
+   status line references the change id (ask if still ambiguous). Read the
+   target phase (status "Implemented") and its acceptance criteria
 2. The OpenSpec change artifacts for `$ARGUMENTS` (or the change id in the
    phase status line): proposal, design doc, spec deltas, task list
 3. The changes under review: `git status`, then the full diff of staged AND
@@ -70,7 +72,7 @@ Close with an overall verdict: does this implementation fulfill Phase N —
 yes, yes-with-deferred-items, or no (in which case list what must happen,
 possibly another `/phaser:apply` pass).
 
-Update the phase status line in `implementation-plan.md` to
+Update the phase status line in the plan file to
 `**Status:** Reviewed (<change id>)` and append a short "Review notes" line to
 the phase section recording deferred items, if any.
 

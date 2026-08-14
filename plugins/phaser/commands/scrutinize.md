@@ -26,8 +26,10 @@ Do not proceed in a warm context.
 
 Read, in order:
 
-1. `implementation-plan.md` — the target phase (status "Proposed") and enough
-   earlier phases for context
+1. The plan file — `implementation-plan.md`, or a scoped
+   `implementation-plan-<scope>.md`; with several plan files, the one whose
+   status line references the change id (ask if still ambiguous). Read the
+   target phase (status "Proposed") and enough earlier phases for context
 2. The OpenSpec change artifacts for `$ARGUMENTS` (or the change id referenced
    in the phase's status line): proposal, design doc, spec deltas, task list
 3. The relevant parts of the codebase the proposal claims to touch — verify
@@ -93,7 +95,7 @@ After the last item, update the OpenSpec artifacts (proposal, design doc,
 tasks) so every resolution is reflected in the spec itself — the spec must
 remain the single source of truth for `/phaser:apply`. If any resolution
 changed the phase's requirements or scope, update the phase section in
-`implementation-plan.md` too, and note the change.
+the plan file too, and note the change.
 
 Update the phase status line to `**Status:** Scrutinized (<change id>)`.
 

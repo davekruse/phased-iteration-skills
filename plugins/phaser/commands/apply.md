@@ -18,7 +18,9 @@ execution, not design.
 ## Step 1: Preflight
 
 - Identify the change: `$ARGUMENTS` if given, otherwise the change id in the
-  status line of the latest phase in `implementation-plan.md`.
+  status line of the latest phase in the plan file (`implementation-plan.md`
+  or a scoped `implementation-plan-<scope>.md`; with several plan files, the
+  one whose status line references the change id — ask if still ambiguous).
 - If that phase's status is not "Scrutinized", warn the user that the spec
   has not been through `/phaser:scrutinize` and ask whether to proceed anyway.
 
@@ -51,7 +53,7 @@ Rules of engagement:
 ## Step 3: Hand off
 
 Report which tasks were completed and any deviations that were user-approved
-along the way. Update the phase status line in `implementation-plan.md` to
+along the way. Update the phase status line in the plan file to
 `**Status:** Implemented (<change id>)`.
 
 End your final message with this reminder block, verbatim, as the very last
@@ -59,6 +61,9 @@ thing (this hand-off crosses a context clear, so it cannot be automated):
 
 > **Next step** (fresh context required):
 > 1. `/clear`
-> 2. `/phaser:review`
+> 2. `/phaser:review <change id>`
 >
 > The review must be a cold read of the diff, so don't skip the clear.
+
+(Substitute the actual openspec change id so the next step is unambiguous
+even with multiple plan files.)
