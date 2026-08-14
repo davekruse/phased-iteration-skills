@@ -24,6 +24,13 @@ Model pins use `claude-fable-5` explicitly and the `opus` / `sonnet` aliases,
 which resolve to the newest model of each tier — so when new Opus/Sonnet
 versions ship, the workflow upgrades automatically without editing pins.
 
+Pinning caveat: a command's `model` frontmatter only holds until the first
+interactive pause; after you reply, the session model takes over. For the
+cost-sensitive apply step, run `/model sonnet` before `/phaser:apply` to hold
+Sonnet for the whole run (the scrutinize hand-off reminds you). Drift on the
+other steps is harmless — it only ever moves to your session's stronger
+model.
+
 The plan file (repo root of the app you're building) is the append-only
 memory of the project: one numbered section per phase, with a status line the
 commands keep updated (Planned -> Proposed -> Scrutinized -> Implemented ->

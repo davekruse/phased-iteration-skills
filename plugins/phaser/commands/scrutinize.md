@@ -113,9 +113,10 @@ Update the phase status line to `**Status:** Scrutinized (<change id>)`.
 
 Summarize what changed, then offer to continue immediately:
 
-> **Next step:** `/phaser:apply` — implement the scrutinized spec. Want me to
-> kick that off now?
+> **Next step:** `/phaser:apply` — implement the scrutinized spec. To keep
+> the whole run on Sonnet, run `/model sonnet` first (the command's model pin
+> only holds until the first interactive pause). Want me to kick it off now
+> regardless?
 
 If the user says yes, invoke the `/phaser:apply` command via the SlashCommand
-tool (it will run under its own pinned model). If not, leave the reminder
-above as the final line.
+tool. If not, leave the reminder above as the final line.

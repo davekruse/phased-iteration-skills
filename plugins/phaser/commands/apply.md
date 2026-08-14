@@ -7,6 +7,10 @@ model: sonnet
 > Invocation note: this command is only ever run by the user directly, or as a
 > user-confirmed hand-off from `/phaser:scrutinize`. Never invoke it on your
 > own initiative.
+>
+> Model note: the `model: sonnet` pin only holds until the first interactive
+> pause; after that the session model takes over. To hold Sonnet for the whole
+> run, the user runs `/model sonnet` before invoking this command.
 
 # phaser:apply — Implement the spec
 
