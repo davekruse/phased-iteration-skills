@@ -1,8 +1,7 @@
-# phased-iteration-skills
+# phaser
 
-A personal Claude Code plugin marketplace. Currently ships one plugin,
-**phaser**, which implements a phased, spec-driven development workflow on top
-of [OpenSpec](https://github.com/Fission-AI/OpenSpec) (`/opsx` commands).
+A Claude Code plugin implementing a phased, spec-driven development workflow on
+top of [OpenSpec](https://github.com/Fission-AI/OpenSpec) (`/opsx` commands).
 
 ## The workflow
 
@@ -49,8 +48,8 @@ project.
 ## Install (on any machine)
 
 ```
-/plugin marketplace add davekruse/phased-iteration-skills
-/plugin install phaser@phased-iteration-skills
+/plugin marketplace add davekruse/phaser
+/plugin install phaser@phaser
 ```
 
 Restart Claude Code; the six `/phaser:*` commands should appear in the command
@@ -61,31 +60,25 @@ menu.
 Push changes to this repo, then on each machine:
 
 ```
-/plugin marketplace update phased-iteration-skills
+/plugin marketplace update phaser
 /plugin update phaser
 ```
 
 ## Layout
 
 ```
-phased-iteration-skills/
+phaser/
 ├── .claude-plugin/
-│   └── marketplace.json          # the catalog Claude Code reads
-├── plugins/
-│   └── phaser/
-│       ├── .claude-plugin/
-│       │   └── plugin.json
-│       ├── commands/
-│       │   ├── plan.md           # /phaser:plan       (model: claude-fable-5)
-│       │   ├── propose.md        # /phaser:propose    (model: claude-fable-5)
-│       │   ├── scrutinize.md     # /phaser:scrutinize (model: opus)
-│       │   ├── apply.md          # /phaser:apply      (model: sonnet)
-│       │   ├── review.md         # /phaser:review     (model: opus)
-│       │   └── archive.md        # /phaser:archive    (model: sonnet)
-│       └── agents/
-│           └── spec-advisor.md   # Opus advisor consulted by /phaser:apply
+│   ├── plugin.json               # the plugin manifest
+│   └── marketplace.json          # single-entry catalog pointing at "./"
+├── commands/
+│   ├── plan.md                   # /phaser:plan       (model: claude-fable-5)
+│   ├── propose.md                # /phaser:propose    (model: claude-fable-5)
+│   ├── scrutinize.md             # /phaser:scrutinize (model: opus)
+│   ├── apply.md                  # /phaser:apply      (model: sonnet)
+│   ├── review.md                 # /phaser:review     (model: opus)
+│   └── archive.md                # /phaser:archive    (model: sonnet)
+├── agents/
+│   └── spec-advisor.md           # Opus advisor consulted by /phaser:apply
 └── README.md
 ```
-
-Additional plugins (skills, other command sets) get their own folder under
-`plugins/` and an entry in `marketplace.json`.
