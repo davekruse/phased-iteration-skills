@@ -60,11 +60,16 @@ style opinions that a linter/formatter owns.
 Present a one-line numbered summary of all findings (with severities) first.
 Then walk through them ONE at a time, exactly like scrutinize:
 
-- Explain the finding, show the relevant code, and explain the impact.
-- Propose the fix. Where multiple remedies exist, give options with pros and
-  cons and a recommendation.
-- Let the user decide: fix now, defer (record where), or accept as-is.
-- Apply "fix now" resolutions immediately, then continue to the next item.
+- Explain the finding, show the relevant code, and explain the impact. Where
+  multiple remedies exist, give pros and cons and a recommendation in text.
+- Then present the choice with the AskUserQuestion tool (one question per
+  finding): "Fix now" with your recommended remedy first, labeled
+  "(Recommended)" (additional options for alternative remedies where they
+  exist), plus "Defer" and "Accept as-is"; each description states the
+  consequence. The built-in "Other" covers free-form direction — don't add
+  your own catch-all. Fall back to asking in text if the tool is unavailable.
+- Apply "fix now" resolutions immediately, record deferrals (where noted),
+  then continue to the next item.
 
 ## Step 4: Verdict and hand off
 
