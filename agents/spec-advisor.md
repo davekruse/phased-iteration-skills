@@ -37,7 +37,9 @@ decision. Prepare the escalation for the user:
 
 - A one-paragraph statement of the conflict and why it cannot be resolved
   from the spec
-- 2–3 options, each with honest pros and cons
+- 2–3 options, each with a short (1–5 word) label and honest pros and cons —
+  the implementer turns these straight into selectable choices for the user,
+  so the labels must stand alone and the pros/cons must be one line each
 - Your recommendation and the reason for it
 - Which spec artifacts must be updated once the user decides
 

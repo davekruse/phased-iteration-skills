@@ -47,8 +47,15 @@ Rules of engagement:
   what you found in the codebase.
   - If the advisor determines the spec already implies one answer, follow the
     advisor's resolution and note it in your final report.
-  - If the advisor says a genuine decision is required, stop and present the
-    conflict to the user with the advisor's options and recommendation.
+  - If the advisor says a genuine decision is required, stop and put it to the
+    user: first describe the conflict in text — what the spec says, what the
+    code actually looks like, and what each of the advisor's options buys and
+    costs. Then present the choice with the AskUserQuestion tool, one question
+    per conflict: one option per candidate resolution, the advisor's
+    recommendation first and labeled "(Recommended)", with the key pro AND con
+    in each option's description. The built-in "Other" covers free-form
+    direction — don't add a catch-all. Fall back to asking in text only if the
+    tool is unavailable. Resume the task list once the user has chosen.
   Spec gaps at this stage are findings, not license for you to architect.
 - Run the tests specified by the tasks as you go; leave the working tree with
   all changes present (staged or unstaged) and do not commit unless the spec

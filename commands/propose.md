@@ -34,8 +34,8 @@ decision is made here, now, by you and the user.
   exists: project structure, existing conventions, key modules the phase
   touches, existing openspec specs if present.
 - Where the as-built code contradicts the phase definition, flag the conflict
-  in `proposal.md` and raise it with the user — never silently resolve it in
-  either direction.
+  in `proposal.md` and put it to the user via the decision protocol in Step 2 —
+  never silently resolve it in either direction.
 
 ## Step 2: Make the architectural decisions
 
@@ -56,8 +56,27 @@ relevant:
 
 Follow the codebase's existing conventions unless the phase explicitly changes
 them. If two defensible options exist and the phase definition does not settle
-it, briefly ask the user rather than deferring the choice into the spec — the
+it, put the choice to the user rather than deferring it into the spec — the
 spec must contain the answer, not the question.
+
+Put every such choice — including the as-built conflicts from Step 1 — to the
+user the same way, one at a time, using the **decision protocol** below.
+
+### Decision protocol
+
+Whenever this command needs the user to decide something, never ask in bare
+prose and never bundle several decisions into one message:
+
+1. **Describe it in text first** — what is undecided or in conflict, why it
+   matters, and what each candidate buys and costs. Be honest about the cons
+   of the option you prefer.
+2. **Then present it with the AskUserQuestion tool**, one question per
+   decision: one option per candidate (usually 2–3), your recommendation first
+   and labeled "(Recommended)", with the key pro AND con packed into each
+   option's description so the trade-off is visible in the picker itself.
+3. The tool's built-in "Other" covers free-form answers — don't add your own
+   catch-all option. Record the resolution before moving to the next decision.
+   Fall back to asking in text only if the tool is unavailable.
 
 ## Step 3: Create the proposal
 

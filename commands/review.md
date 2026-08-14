@@ -65,8 +65,10 @@ Then walk through them ONE at a time, exactly like scrutinize:
 - Then present the choice with the AskUserQuestion tool (one question per
   finding): "Fix now" with your recommended remedy first, labeled
   "(Recommended)" (additional options for alternative remedies where they
-  exist), plus "Defer" and "Accept as-is"; each description states the
-  consequence. The built-in "Other" covers free-form direction — don't add
+  exist), plus "Defer" and "Accept as-is"; each description carries the key pro
+  AND con of that path, so the trade-off is visible in the picker itself rather
+  than only in the text above it.
+  The built-in "Other" covers free-form direction — don't add
   your own catch-all. Fall back to asking in text if the tool is unavailable.
 - Apply "fix now" resolutions immediately, record deferrals (where noted),
   then continue to the next item.
