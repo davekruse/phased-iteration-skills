@@ -42,7 +42,7 @@ project.
 ## Install (on any machine)
 
 ```
-/plugin marketplace add <your-github-username>/phased-iteration-skills
+/plugin marketplace add davekruse/phased-iteration-skills
 /plugin install phaser@phased-iteration-skills
 ```
 
