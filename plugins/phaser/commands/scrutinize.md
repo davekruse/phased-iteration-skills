@@ -33,6 +33,9 @@ Read, in order:
 3. The relevant parts of the codebase the proposal claims to touch — verify
    the spec's claims against reality (do those files, functions, and
    conventions actually exist as described?)
+4. The phase's "Key code touchpoints" section, if present — independently
+   re-verify each listed invariant (e.g. "X requires no changes") against the
+   code; do not take the proposal's word for it
 
 ## Step 2: Scrutinize from multiple angles
 
@@ -44,6 +47,7 @@ Build a written list of findings. Examine at minimum these angles:
 - Is every task truly decision-free for a smaller implementing model? Flag any
   task where the implementer would have to choose or architect.
 - Are tasks correctly ordered with no forward dependencies?
+- If the phase lists "Companion docs", does a task reconcile each of them?
 
 **Architecture**
 - Are the design decisions sound? Challenge them: consistency with the

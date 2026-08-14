@@ -1,7 +1,7 @@
 ---
 description: "Step 5 of 6 — With a fresh context (run /clear first), perform a senior-dev code review of staged and unstaged changes against the phase plan and spec, iterating through findings with the user"
 argument-hint: "[optional: openspec change id, defaults to the phase's active change]"
-model: sonnet
+model: opus
 disable-model-invocation: true
 ---
 
@@ -36,6 +36,9 @@ Conduct a senior-developer-level review and build a written findings list.
   specified (paths, names, contracts, behaviors)?
 - Are the phase's acceptance criteria met? Test each one against the diff.
 - Any silent deviations from the spec? Any scope creep beyond it?
+- If the phase lists "Key code touchpoints" with invariants (e.g. "X requires
+  no changes"), confirm the diff honors them — invariant-protected areas must
+  not be touched unless the spec explicitly says so.
 
 **Axis 2 — Code quality**
 - Correctness: logic errors, edge cases, off-by-ones, error handling,

@@ -1,7 +1,7 @@
 ---
 description: "Step 6 of 6 — Archive the completed OpenSpec change (/opsx:archive) and mark the phase complete in implementation-plan.md"
 argument-hint: "[optional: openspec change id, defaults to the phase's active change]"
-model: claude-fable-5
+model: sonnet
 ---
 
 > Invocation note: this command is only ever run by the user directly, or as a
