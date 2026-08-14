@@ -36,8 +36,17 @@ record it durably in the plan file at the repository root
 
 ## Step 2: Discuss and define
 
-If `$ARGUMENTS` was provided, treat it as the seed topic. Otherwise ask what
-this phase should accomplish.
+The seed topic is whatever remains of `$ARGUMENTS` after Step 1 consumed the
+scope token and the phase number. `/phaser:plan ats` and `/phaser:plan ats 10`
+therefore carry NO seed topic — they mean "start a new phase in the ats plan",
+not "build something called ats".
+
+**Always open with a question.** With no seed topic, your first response is a
+question about what this phase should accomplish — never a draft, never an
+assumption pulled from the codebase or earlier phases (use those to inform the
+question, e.g. "Phase 9 finished X; what's next?"). With a seed topic, open by
+asking about it. Do not reach Step 3 without at least one round of answers
+from the user.
 
 Interview the user conversationally (a few questions at a time, not a wall of
 questions) until you can clearly articulate:
