@@ -1,0 +1,14 @@
+{
+  "name": "phased-iteration-skills",
+  "owner": {
+    "name": "Dave Kruse",
+    "email": "dave@krusetech.com"
+  },
+  "plugins": [
+    {
+      "name": "phaser",
+      "source": "./plugins/phaser",
+      "description": "Phased iteration workflow: plan -> propose -> scrutinize -> apply -> review -> archive, built on OpenSpec (/opsx) with model pinning per step"
+    }
+  ]
+}
