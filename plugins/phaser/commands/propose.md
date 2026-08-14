@@ -1,6 +1,6 @@
 ---
 description: "Step 2 of 6 — Use a frontier model to create an OpenSpec proposal (/opsx:propose) for the current phase, with ALL architectural decisions made up front so a smaller model can implement it"
-argument-hint: "[optional: phase number, defaults to latest Planned phase]"
+argument-hint: "[optional: phase number, defaults to latest Planned phase] [optional: extra context or constraints for the proposal]"
 model: claude-fable-5
 ---
 
@@ -18,12 +18,21 @@ decision is made here, now, by you and the user.
 ## Step 1: Load the phase
 
 - Read `implementation-plan.md` in the repo root.
-- Target phase: `$ARGUMENTS` if a phase number was given, otherwise the
-  highest-numbered phase with status "Planned".
+- Target phase: the phase number in `$ARGUMENTS` if one was given, otherwise
+  the highest-numbered phase with status "Planned". Any remaining text in
+  `$ARGUMENTS` is extra context/constraints from the user — honor it alongside
+  the phase definition.
 - If no such phase exists, stop and tell the user to run `/phaser:plan` first.
+- If the phase has a "Key code touchpoints" section, read every listed file or
+  subsystem before drafting — it is a mandatory pre-read, and any invariant it
+  states (e.g. "confirm X requires no changes") must be verified against the
+  code and the result recorded in the proposal.
 - Read enough of the codebase to ground your decisions in what actually
   exists: project structure, existing conventions, key modules the phase
   touches, existing openspec specs if present.
+- Where the as-built code contradicts the phase definition, flag the conflict
+  in `proposal.md` and raise it with the user — never silently resolve it in
+  either direction.
 
 ## Step 2: Make the architectural decisions
 
@@ -65,6 +74,10 @@ Then review what openspec generated and edit the proposal artifacts so that:
   captured in the design doc, so `/phaser:scrutinize` can challenge them.
 - Acceptance criteria from the phase map onto specific tasks; nothing in the
   phase is left uncovered.
+- Destructive or irreversible operations (dropping tables, rewriting data,
+  breaking migrations) and security-critical behavior (auth boundaries,
+  visibility rules) each get their own dedicated task — never folded into a
+  larger one. Same for any "Companion docs" reconciliation the phase lists.
 
 ## Step 4: Hand off
 
