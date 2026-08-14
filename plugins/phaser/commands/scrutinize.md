@@ -80,14 +80,24 @@ Discard nitpicks that would not change what gets built.
 
 Present a one-line numbered summary of all findings first, so the user knows
 the shape of the conversation. Then walk through them ONE at a time — never
-dump the full analysis at once:
+dump the full analysis at once.
 
-- For a **Question**: explain what is undefined and why it matters, propose a
-  default answer, and ask the user to confirm or redefine.
-- For a **Decision**: lay out the options (usually 2–3), give honest pros and
-  cons for each, state your recommendation and why, and let the user choose.
+For each item, first explain it in text: what is undefined or being
+challenged, why it matters, and honest pros and cons for each option. Then
+present the choice with the AskUserQuestion tool (one question per finding)
+so the user selects rather than types:
 
-Record the resolution of each item before moving to the next.
+- For a **Question**: options are your proposed default (first, labeled
+  "(Recommended)") plus the plausible alternatives; each option's description
+  states its consequence.
+- For a **Decision**: one option per candidate (usually 2–3), your
+  recommendation first and labeled "(Recommended)"; pack the key pro and con
+  into each option's description.
+
+The tool's built-in "Other" choice covers free-form redefinition, so don't
+add your own catch-all option. Record the resolution of each item before
+moving to the next. If AskUserQuestion is unavailable in the environment,
+fall back to asking in text.
 
 ## Step 4: Fold resolutions back into the spec
 
