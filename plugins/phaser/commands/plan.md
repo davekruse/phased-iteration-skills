@@ -19,8 +19,10 @@ record it durably in the plan file at the repository root
   the unscoped `implementation-plan.md`, all in the repo root.
   - If `$ARGUMENTS` starts with a scope token (a short slug like `ats` — not a
     number, not the start of a summary sentence), use
-    `implementation-plan-<scope>.md`. When it's unclear whether the first
-    token is a scope or part of the summary, ask.
+    `implementation-plan-<scope>.md`. A first token matching an existing
+    `implementation-plan-<scope>.md` is ALWAYS the scope — so `/phaser:plan
+    ats` alone means "next phase in the ats plan". Otherwise, when it's
+    unclear whether the first token is a scope or part of the summary, ask.
   - With no scope: use `implementation-plan.md`; if it doesn't exist but
     scoped plan files do, ask which scope this phase belongs to.
 - If the plan file does not exist, you will create it with a title and a short
