@@ -48,6 +48,9 @@ Build a written list of findings. Examine at minimum these angles:
   task where the implementer would have to choose or architect.
 - Are tasks correctly ordered with no forward dependencies?
 - If the phase lists "Companion docs", does a task reconcile each of them?
+- Do the proposal or spec deltas drift from decisions recorded in the phase
+  itself (requirements, constraints / early decisions)? Those are the user's
+  decisions — flag drift, don't relitigate them.
 
 **Architecture**
 - Are the design decisions sound? Challenge them: consistency with the
@@ -59,6 +62,10 @@ Build a written list of findings. Examine at minimum these angles:
 - Security (authn/z, injection, secrets, PII), failure modes and partial
   failure, migrations and rollback, backwards compatibility, observability,
   concurrency, empty/degenerate states, testing gaps, operational concerns.
+- For any authorization boundary the spec introduces or touches: enumerate
+  EVERY path to the protected data, not just the named controller/endpoint —
+  ORM associations, realtime broadcasts/channels, mailers, background jobs,
+  serializers/APIs. A scoping hole in an indirect path is still a hole.
 
 Classify each finding as either:
 - **Question** — the spec is ambiguous or silent; definition is needed
