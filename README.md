@@ -71,7 +71,7 @@ project.
 
 ```
 /plugin marketplace add davekruse/phaser
-/plugin install phaser@phaser
+/plugin install phaser@krusetech
 ```
 
 Restart Claude Code; the six `/phaser:*` commands should appear in the command
@@ -82,8 +82,8 @@ menu.
 Push changes to this repo, then on each machine:
 
 ```
-/plugin marketplace update phaser
-/plugin update phaser
+/plugin marketplace update krusetech
+/plugin update phaser@krusetech
 ```
 
 ## Layout
@@ -92,7 +92,7 @@ Push changes to this repo, then on each machine:
 phaser/
 ├── .claude-plugin/
 │   ├── plugin.json               # the plugin manifest
-│   └── marketplace.json          # single-entry catalog pointing at "./"
+│   └── marketplace.json          # "krusetech" catalog pointing at "./"
 ├── commands/
 │   ├── plan.md                   # /phaser:plan       (model: claude-fable-5)
 │   ├── propose.md                # /phaser:propose    (model: claude-fable-5)
