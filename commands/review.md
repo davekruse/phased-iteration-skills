@@ -21,8 +21,9 @@ stop and ask them to run `/clear` and invoke `/phaser:review` again.
 
 1. The plan file — `implementation-plan.md`, or a scoped
    `implementation-plan-<scope>.md`; with several plan files, the one whose
-   status line references the change id (ask if still ambiguous). Read the
-   target phase (status "Implemented") and its acceptance criteria
+   status line references the change id in `$ARGUMENTS`, or ask which
+   plan/scope if no id was given. Read the target phase (status
+   "Implemented") and its acceptance criteria
 2. The OpenSpec change artifacts for `$ARGUMENTS` (or the change id in the
    phase status line): proposal, design doc, spec deltas, task list
 3. The changes under review: `git status`, then the full diff of staged AND

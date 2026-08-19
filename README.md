@@ -19,9 +19,11 @@ them.
 | 5    | `/phaser:review`    | Opus (latest)          | (after `/clear`) senior review of staged+unstaged changes, item by item |
 | 6    | `/phaser:archive`   | Sonnet (latest)        | `/opsx:archive` + mark phase Complete |
 
-Model pins use `claude-fable-5` explicitly and the `opus` / `sonnet` aliases,
-which resolve to the newest model of each tier — so when new Opus/Sonnet
-versions ship, the workflow upgrades automatically without editing pins.
+Model pins use the `opus` / `sonnet` aliases, which resolve to the newest
+model of each tier — so when new Opus/Sonnet versions ship, those steps
+upgrade automatically without editing pins. `claude-fable-5` is an exact
+model id (no alias exists for the Fable tier), so steps 1–2 need a one-line
+pin edit when a newer Fable ships.
 
 Pinning caveat: a command's `model` frontmatter only holds until the first
 interactive pause; after you reply, the session model takes over. For the

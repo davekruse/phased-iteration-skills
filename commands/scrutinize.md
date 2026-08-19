@@ -28,8 +28,9 @@ Read, in order:
 
 1. The plan file — `implementation-plan.md`, or a scoped
    `implementation-plan-<scope>.md`; with several plan files, the one whose
-   status line references the change id (ask if still ambiguous). Read the
-   target phase (status "Proposed") and enough earlier phases for context
+   status line references the change id in `$ARGUMENTS`, or ask which
+   plan/scope if no id was given. Read the target phase (status "Proposed")
+   and enough earlier phases for context
 2. The OpenSpec change artifacts for `$ARGUMENTS` (or the change id referenced
    in the phase's status line): proposal, design doc, spec deltas, task list
 3. The relevant parts of the codebase the proposal claims to touch — verify

@@ -1,5 +1,5 @@
 ---
-description: "Step 4 of 6 — Implement the scrutinized OpenSpec change exactly as specified (/opsx:apply), making no architectural decisions"
+description: "Step 4 of 6 — Implement the scrutinized OpenSpec change exactly as specified (/opsx:apply), making no architectural decisions (invoke only when the user asks, or as the user-confirmed hand-off from /phaser:scrutinize)"
 argument-hint: "[optional: openspec change id, defaults to the phase's active change]"
 model: sonnet
 ---
@@ -21,10 +21,12 @@ execution, not design.
 
 ## Step 1: Preflight
 
-- Identify the change: `$ARGUMENTS` if given, otherwise the change id in the
-  status line of the latest phase in the plan file (`implementation-plan.md`
-  or a scoped `implementation-plan-<scope>.md`; with several plan files, the
-  one whose status line references the change id — ask if still ambiguous).
+- Identify the change: if `$ARGUMENTS` gives a change id, use it, and with
+  several plan files pick the one whose status line references that id.
+  Otherwise use the change id in the status line of the latest phase in the
+  plan file (`implementation-plan.md` or a scoped
+  `implementation-plan-<scope>.md`); with several plan files and no id given,
+  ask which plan/scope to use.
 - If that phase's status is not "Scrutinized", warn the user that the spec
   has not been through `/phaser:scrutinize` and ask whether to proceed anyway.
 
